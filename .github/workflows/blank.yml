@@ -20,13 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: step1
-        run: echo "test=hello" >> "$GITHUB_OUTPUT"
+        run: echo "test=hello${{ matrix.color }}" >> "$GITHUB_OUTPUT"
       - id: step2
-        run: echo "test=world" >> "$GITHUB_OUTPUT"
+        run: echo "test=world${{ matrix.color }}" >> "$GITHUB_OUTPUT"
 
   downstream:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: echo
-        run: ${{ needs.build.outputs[format('output1', 'blue')] }}
+        run: echo "${{ needs.build.outputs[format('output1', 'matrix.color')] }}"
