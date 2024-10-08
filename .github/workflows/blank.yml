@@ -29,4 +29,4 @@ jobs:
     needs: build
     steps:
       - name: echo
-        run: ${{ needs.build.outputs[format('output1', matrix.color)] }}
+        run: ${{ needs.build.outputs[format('output1', 'blue')] }}
